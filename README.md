@@ -1,41 +1,4 @@
-Perfeito! O README está bem completo, porém notei **um conflito de merge no final** que precisa ser corrigido. As linhas `<<<<<<< HEAD`, `=======`, e `>>>>>>> 3a45818...` não devem ficar no arquivo.
 
-Além disso, como você expandiu o projeto com novos checks, Docker e CI/CD (conforme discutimos), faz sentido atualizar o README para refletir essas mudanças. Abaixo está a **versão final revisada**, sem conflito e com as novas informações incorporadas.
-
----
-
-## 🔧 Como corrigir o conflito agora
-
-No seu terminal (dentro da pasta do projeto), abra o `README.md` e remova as linhas de conflito. Basicamente, delete estas três linhas no final:
-
-```
-<<<<<<< HEAD
----
-=======
----
->>>>>>> 3a45818 (feat: initial commit - AWS Security Scanner)
-```
-
-Deixe apenas:
-
-```
----
-```
-
-Depois faça:
-
-```bash
-git add README.md
-git commit -m "fix: resolve README merge conflict"
-```
-
-Se preferir, substitua todo o conteúdo pelo README abaixo.
-
----
-
-## ✅ README final atualizado (sem conflito e com novos módulos)
-
-```markdown
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License MIT">
