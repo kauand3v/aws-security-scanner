@@ -1,5 +1,3 @@
-/* Estilos customizados para o dashboard */
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -14,31 +12,28 @@ body {
     font-weight: 600;
 }
 
-/* Cores para badges de severidade */
 .badge-critical {
-    background-color: #dc3545; /* vermelho */
+    background-color: #dc3545;
     color: white;
 }
 .badge-high {
-    background-color: #fd7e14; /* laranja */
+    background-color: #fd7e14;
     color: white;
 }
 .badge-medium {
-    background-color: #ffc107; /* amarelo */
+    background-color: #ffc107;
     color: black;
 }
 .badge-low {
-    background-color: #28a745; /* verde */
+    background-color: #28a745;
     color: white;
 }
 
-/* Tabela com hover suave */
 .table-hover tbody tr:hover {
     background-color: #f8f9fa;
     cursor: pointer;
 }
 
-/* Ajustes para telas pequenas */
 @media (max-width: 768px) {
     .container-fluid {
         padding-left: 10px;
