@@ -1,0 +1,47 @@
+/* Estilos customizados para o dashboard */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-weight: 600;
+}
+
+/* Cores para badges de severidade */
+.badge-critical {
+    background-color: #dc3545; /* vermelho */
+    color: white;
+}
+.badge-high {
+    background-color: #fd7e14; /* laranja */
+    color: white;
+}
+.badge-medium {
+    background-color: #ffc107; /* amarelo */
+    color: black;
+}
+.badge-low {
+    background-color: #28a745; /* verde */
+    color: white;
+}
+
+/* Tabela com hover suave */
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
