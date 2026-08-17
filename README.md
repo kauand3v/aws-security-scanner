@@ -677,3 +677,155 @@ make lint
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ---
+
+Aqui está uma seção completa, em português e inglês, explicando as próximas atualizações do projeto, como cada uma funcionará, e um diagrama da arquitetura futura. Você pode adicionar ao README após a seção de Contribuição.
+
+---
+
+## 🆕 Próximas Atualizações | Upcoming Updates
+
+*Esta seção descreve as funcionalidades planejadas para as próximas versões do aws-security-scanner.*
+
+---
+
+### 🇧🇷 Português
+
+#### ✅ O que está por vir?
+
+1. **Novos checks: IAM Roles e S3 Block Public Access**  
+   Além das verificações atuais, o scanner passará a analisar:
+   - **IAM Roles**: permissões excessivas, políticas com `"Action": "*"` ou `"Resource": "*"`, e roles sem uso.
+   - **S3 Block Public Access**: verificação se as configurações de bloqueio de acesso público estão ativadas nos buckets e na conta.
+
+2. **Modo de correção automática (`--fix`)**  
+   O scanner será capaz de corrigir automaticamente alguns problemas detectados, como:
+   - Fechar portas abertas em Security Groups.
+   - Aplicar políticas de bloqueio público em buckets S3.
+   - Habilitar criptografia em volumes EC2.
+   - O modo terá uma opção `--dry-run` para simular as correções sem aplicá-las, e uma confirmação interativa antes de cada mudança.
+
+3. **Suporte a múltiplas contas AWS (AWS Organizations)**  
+   A ferramenta poderá escanear todas as contas de uma organização AWS de uma só vez, assumindo roles em cada conta via `sts:AssumeRole`. O resultado será consolidado em um único relatório, com a identificação da conta de origem de cada risco.
+
+4. **Exportação de relatórios em CSV e PDF**  
+   Além de JSON e HTML, o scanner gerará relatórios em:
+   - **CSV**: para análise em planilhas e integração com outras ferramentas.
+   - **PDF**: para compartilhamento com stakeholders e auditorias formais.
+
+5. **Dashboard web com histórico de scans**  
+   Uma interface web simples (ex.: Flask/FastAPI + SQLite) armazenará os resultados de cada scan, permitindo:
+   - Visualizar tendências ao longo do tempo.
+   - Filtrar por severidade, serviço ou conta.
+   - Exportar relatórios diretamente pela interface.
+
+6. **Publicação no PyPI**  
+   O projeto será publicado como pacote Python, permitindo instalação via:
+   ```bash
+   pip install aws-security-scanner
+   ```
+   Isso facilitará a distribuição e o uso em pipelines de CI/CD.
+
+7. **Badges no README**  
+   Serão adicionados selos (badges) no topo do README para indicar:
+   - Versão do Python suportada.
+   - Status do build no GitHub Actions.
+   - Cobertura de código.
+   - Licença.
+   - Disponibilidade no PyPI.
+
+---
+
+### 🇬🇧 English
+
+#### ✅ What's coming next?
+
+1. **New checks: IAM Roles and S3 Block Public Access**  
+   In addition to current checks, the scanner will analyze:
+   - **IAM Roles**: overly permissive policies (e.g., `"Action": "*"` or `"Resource": "*"`), unused roles.
+   - **S3 Block Public Access**: verification of public access block settings on buckets and at account level.
+
+2. **Auto-remediation mode (`--fix`)**  
+   The scanner will be able to automatically fix some detected issues, such as:
+   - Closing open ports in Security Groups.
+   - Applying public access block policies to S3 buckets.
+   - Enabling encryption on EC2 volumes.
+   - A `--dry-run` option will simulate fixes without applying them, with interactive confirmation before each change.
+
+3. **Support for multiple AWS accounts (AWS Organizations)**  
+   The tool will scan all accounts in an AWS Organization at once, assuming roles in each account via `sts:AssumeRole`. Results will be consolidated into a single report, identifying the source account for each risk.
+
+4. **CSV and PDF report export**  
+   In addition to JSON and HTML, the scanner will generate reports in:
+   - **CSV**: for spreadsheet analysis and integration with other tools.
+   - **PDF**: for sharing with stakeholders and formal audits.
+
+5. **Web dashboard with scan history**  
+   A simple web interface (e.g., Flask/FastAPI + SQLite) will store scan results, allowing:
+   - Visualization of trends over time.
+   - Filtering by severity, service, or account.
+   - Direct export of reports from the interface.
+
+6. **Publication on PyPI**  
+   The project will be published as a Python package, enabling installation via:
+   ```bash
+   pip install aws-security-scanner
+   ```
+   This will simplify distribution and use in CI/CD pipelines.
+
+7. **README badges**  
+   Badges will be added at the top of the README to indicate:
+   - Supported Python version.
+   - Build status on GitHub Actions.
+   - Code coverage.
+   - License.
+   - Availability on PyPI.
+
+---
+
+### 🧩 Diagrama da Arquitetura Futura | Future Architecture Diagram
+
+```
+┌─────────────────────┐
+│   CLI / CI/CD       │
+│  (--fix, --dry-run) │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│   Scanner (async)   │
+│   (orquestrador)    │
+└──────────┬──────────┘
+           │
+           ├──────────────────┬──────────────────┐
+           │                  │                  │
+           ▼                  ▼                  ▼
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│   Checks        │  │   Remediador    │  │   Multi-Account │
+│ (IAM, S3, RDS,  │  │  (--fix mode)   │  │  (Organizations)│
+│  Lambda, etc.)  │  │                 │  │  assume-role    │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+           │                  │                  │
+           └──────────────────┼──────────────────┘
+                              │
+                              ▼
+               ┌─────────────────────────────┐
+               │  Reporters & Exporters      │
+               │ JSON | HTML | CSV | PDF     │
+               └──────────────┬──────────────┘
+                              │
+                              ▼
+               ┌─────────────────────────────┐
+               │  Web Dashboard              │
+               │ (histórico, filtros,        │
+               │  exportação)                │
+               └─────────────────────────────┘
+```
+
+---
+
+*Essas atualizações farão do aws-security-scanner uma ferramenta ainda mais completa para auditoria e conformidade de segurança na AWS.*
+
+*These updates will make aws-security-scanner an even more comprehensive tool for AWS security auditing and compliance.*
+```
+
+---
