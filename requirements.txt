@@ -1,0 +1,30 @@
+# requirements.txt
+# Resolved and functionally verified together on 2026-08-16 (Python 3.12; also
+# checked as supporting Python 3.10+ per each package's declared requires-python).
+
+# --- AWS SDK: sync + async ---
+# These four are coupled: aioboto3 pins its aiobotocore version exactly, and
+# aiobotocore/boto3 each pin botocore to narrow, overlapping ranges. Upgrade
+# them together (re-resolve with pip), never bump just one in isolation.
+aioboto3==15.5.0
+aiobotocore==2.25.1
+boto3==1.40.61
+botocore==1.40.61
+
+# --- Config / templating / console ---
+python-dotenv==1.2.3
+PyYAML==6.0.3
+Jinja2==3.1.6
+colorama==0.4.6
+
+# --- Testing ---
+pytest==9.1.1
+pytest-asyncio==1.4.0
+pytest-cov==7.1.0
+# [server] extra pulls in Flask/Werkzeug for moto's real HTTP mock server
+# (moto.server.ThreadedMotoServer). This is required to mock aioboto3 calls:
+# moto's in-process @mock_aws decorator only wraps sync botocore responses,
+# so async aiobotocore requests raise "TypeError: object bytes can't be used
+# in 'await' expression" if you rely on it directly. Point aioboto3's client
+# at the ThreadedMotoServer's endpoint_url instead — see note below.
+moto[server]==5.2.2
