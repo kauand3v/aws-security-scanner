@@ -1,0 +1,64 @@
+# ============================================================
+# aws-security-scanner — Configuração Padrão (Fallback)
+# ============================================================
+# Usado automaticamente quando config.yaml não é encontrado na
+# raiz do projeto, ou quando alguma chave obrigatória está
+# ausente nele. Mantenha estes valores como uma base segura e
+# sensata, válida para qualquer ambiente.
+# ============================================================
+
+checks:
+  # Security Groups — regras de entrada/saída abertas para a
+  # internet (0.0.0.0/0), portas sensíveis expostas (22, 3389...), etc.
+  security_groups:
+    enabled: true
+    risk_levels: ["CRITICAL", "HIGH", "MEDIUM"]
+
+  # Buckets S3 — acesso público, ausência de criptografia,
+  # versionamento e logging desabilitados, etc.
+  s3_buckets:
+    enabled: true
+    risk_levels: ["CRITICAL", "HIGH", "MEDIUM"]
+
+  # Políticas IAM — permissões amplas demais, uso de wildcard (*),
+  # políticas administrativas sem restrição, etc.
+  iam_policies:
+    enabled: true
+    risk_levels: ["CRITICAL", "HIGH"]
+
+  # Instâncias RDS — acesso público, ausência de criptografia,
+  # backups automáticos desabilitados, etc.
+  rds:
+    enabled: true
+    risk_levels: ["CRITICAL", "HIGH", "MEDIUM"]
+
+  # Funções Lambda — permissões excessivas na role de execução,
+  # segredos em variáveis de ambiente, runtime desatualizado, etc.
+  lambda:
+    enabled: true
+    risk_levels: ["HIGH", "MEDIUM"]
+
+  # Chaves KMS — políticas de chave permissivas demais, rotação
+  # automática desabilitada, etc.
+  kms:
+    enabled: true
+    risk_levels: ["CRITICAL", "HIGH"]
+
+  # CloudTrail — trilhas desabilitadas, não multi-região,
+  # validação de integridade de logs desabilitada, etc.
+  cloudtrail:
+    enabled: true
+    risk_levels: ["CRITICAL", "HIGH"]
+
+  # Volumes EBS (EC2) — volumes não criptografados, volumes
+  # órfãos/não anexados, ausência de snapshots recentes, etc.
+  ec2_volumes:
+    enabled: true
+    risk_levels: ["HIGH", "MEDIUM", "LOW"]
+
+reporting:
+  # Diretório onde os relatórios gerados serão salvos
+  output_dir: "./reports"
+
+  # Formatos de saída do relatório
+  formats: ["json", "html", "console"]
