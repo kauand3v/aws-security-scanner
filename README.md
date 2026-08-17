@@ -828,4 +828,3 @@ Aqui está uma seção completa, em português e inglês, explicando as próxima
 *These updates will make aws-security-scanner an even more comprehensive tool for AWS security auditing and compliance.*
 ```
 
----
